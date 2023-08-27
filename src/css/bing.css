@@ -1,0 +1,10 @@
+body>#prompt-container {
+  /* bing在非ai页面隐藏提示词 */
+  display: none;
+}
+
+body :has(cib-serp[mode=conversation])~#prompt-container {
+  /* bing在ai页面显示提示词 */
+  display: flex !important;
+}
+

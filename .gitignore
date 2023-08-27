@@ -1,0 +1,5 @@
+# 忽略node_modules目录
+node_modules
+
+# 忽略 public/常用提示词.json 文件
+public/常用提示词.json

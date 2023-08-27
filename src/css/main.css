@@ -1,0 +1,196 @@
+@import url(./iconfont.css);
+
+
+#prompt-container {
+  /* 整个容器 */
+  position: fixed;
+  right: var(--right, 20px);
+  bottom: var(--bottom, 50px);
+  font-size: 13px;
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: flex-end;
+  height: 0;
+  z-index: 99999; /* 百度文心、claude需要 */
+  pointer-events: auto; /* claude 弹出选择历史记录需要 */
+}
+
+#prompt-container:hover {
+  /* 整个容器hover */
+  height: auto;
+  max-height: calc(100vh - var(--bottom));
+}
+
+#prompt-container .item {
+  /* 每一项 公共 */
+  box-sizing: border-box;
+  line-height: 16px;
+  padding: 7px 15px;
+  border: 0;
+  border-radius: 20px;
+  text-align: center;
+  color: #fff;
+  box-shadow: 0 0 10px 6px rgba(0, 0, 0, 0.1);
+  background: linear-gradient(45deg, #c705f7, #FC5C7D 70%, #6A82FB) 0 / 200% auto;
+  /* 和放大动画重复 就写那边 */
+  user-select: none;
+  cursor: pointer;
+  position: relative;
+}
+
+#prompt-container .item:hover {
+  /* 渐变色背景 */
+  background-position: 100%;
+}
+
+#prompt-container>.control-center>.add-btn {
+  /* 添加按钮 */
+  width: 30px; /* 折叠时 */
+  height: 30px; /* 折叠时 */
+  line-height: 30px;
+  font-size: 0; /* 避免奇怪高度 */
+  padding: 0; /* 折叠时要是正圆 */
+  box-sizing: border-box;
+  transition: width .2s, background-position .6s; /* 宽度、背景过度 */
+  overflow: hidden;
+  white-space: nowrap;
+  outline: none;
+}
+
+#prompt-container>.control-center>.add-btn>i {
+  /* 图标和文字并排所必须 */
+  display: inline-block;
+  width: 30px;
+  text-align: center;
+  transition: transform .3s;
+}
+
+#prompt-container>.control-center>.add-btn>span {
+  /* 折叠时隐藏 为折叠，固定高度好计算 */
+  display: none;
+  font-size: 13px;
+  vertical-align: top;
+}
+
+#prompt-container>.control-center>.add-btn:hover {
+  /* 按钮hover时展开 */
+  width: 118px;
+  padding-right: 10px;
+}
+
+#prompt-container>.control-center>.add-btn:hover>i {
+  /* 添加提示词hover时旋转 */
+  transform: rotateZ(360deg);
+}
+
+#prompt-container>.control-center>.add-btn:hover>span {
+  /* hover时展开，显示文字 */
+  display: inline-block;
+}
+
+#prompt-container>.prompt-box {
+  /* 折叠 */
+  width: 0; /* 折叠时为0 */
+  margin-right: -20px; /* 贴右边 子元素拉回来 使阴影更自然 */
+  overflow-y: scroll; /* 可滚动 */
+  scroll-behavior: smooth; /* 平滑滚动 */ 
+  transform: scaleY(0);
+  transition: transform 0.2s;
+  transform-origin: center bottom;
+}
+
+#prompt-container:hover>.prompt-box {
+  /* hover显示列表 先废弃，js模拟 调试用 */
+  /* width: 100%;
+  transform: scaleY(1); */
+}
+
+#prompt-container>.prompt-box::-webkit-scrollbar,
+#prompt-container>.prompt-box::-webkit-scrollbar-thumb {
+  /* 不显示滑动条 */
+  display: none;
+  width: 0px;
+  background: transparent; /* Chrome/Safari/Webkit */
+}
+
+#prompt-container>.prompt-box>ul {
+  /* 提示词 列表 */
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: flex-end;
+  overflow: visible;
+  margin: 0; /* bard 默认样式清楚 */
+  padding: 0; /* bard 默认样式清楚 */
+  /* font-size: var(--promptFontSize); */
+  z-index: -1;
+  position: relative;
+  width: 74%;
+  right: calc(-26% + 20px); /* 父元素贴右边 子元素拉回来 使阴影更自然 */
+}
+
+#prompt-container>.prompt-box>ul>li.item {
+  /* 提示词每一项 */
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  position: relative;
+  margin-bottom: var(--marginBottom);
+  max-width: calc(100% - 10px);
+  transform-origin: right center;
+  transition: transform .1s, background-position .6s; /* 宽度、背景过度 */
+}
+
+#prompt-container>.prompt-box>ul>li.item>p {
+  /* bard 默认样式清楚 */
+  margin: 0;
+}
+
+#prompt-container>.prompt-box>ul>.item>.del,
+.clear-all-content {
+  /* 删除按钮 */
+  display: block;
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 15px;
+  height: 15px;
+  line-height: 15px;
+  border-radius: 50%;
+  text-align: center;
+  font-style: normal;
+  cursor: default;
+  transform: rotateZ(45deg);
+}
+
+.clear-all-content {
+  /* 清除输入 */
+  top: -8px;
+  font-size: 15px;
+  font-style: normal;
+  font-family: "Microsoft YaHei", "Avenir", "Helvetica", "Arial", "Heiti SC", "sans-serif";
+  background-color: rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+}
+
+#prompt-container>.prompt-box>ul:not(.shake)>.item:hover {
+  /* hover 放大(编辑时不放大) */
+  transform: scale(1.3);
+  z-index: 99999;
+}
+
+#prompt-container>.prompt-box>ul>.item:last-child {
+  /* 最后一个 就是最顶上的那个 为扩大hover范围、删除最后一个保持hover */
+  margin-top: 45px;
+}
+
+.enter-prompt { 
+  /* 添加词弹窗 input样式 */
+  outline: none;
+  border: 0;
+  height: 100px;
+  width: 350px;
+  border-radius: 5px;
+  padding: 0 5px !important;
+  background-color: #fff;
+  resize: vertical;
+}

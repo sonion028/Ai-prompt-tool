@@ -1,0 +1,83 @@
+{
+  "name": "AI prompt tool",
+  "description": "这是一个Ai提示词工具。它能在Ai聊天页面右侧显示提示词，让使用提示词变得更加简单，从而提高提示词的使用率。目前，支持ChatGPT、Claude、new Bing、Bard、文心一言、百度搜索Ai。如果您希望够适配其他AI，可以通过github issues或email进行反馈。This is an Ai prompt tool. It displays prompts on the right side of the Ai chat page, simplifying the use of prompts and thereby enhancing their utilization. Currently, it supports ChatGPT, Claude, new Bing, Bard, ERNIE Bot and Baidu search Ai. If you wish to adapt other AIs, feedback can be provided via GitHub issues or email.",
+  "version": "0.1.2",
+  "manifest_version": 3,
+  "minimum_chrome_version": "18.0",
+  "permissions": [
+    "storage",
+    "activeTab",
+    "scripting",
+    "declarativeContent",
+    "background"
+  ],
+  "host_permissions": [
+    "https://chat.openai.com/*",
+    "https://www.bing.com/*",
+    "https://claude.ai/*",
+    "https://bard.google.com/*",
+    "https://yiyan.baidu.com/*",
+    "https://www.baidu.com/*"
+  ],
+  "icons": {
+    "48": "public/img/logo.png",
+    "64": "public/img/logo.png",
+    "128": "public/img/logo.png"
+  },
+  "action": {
+    "default_popup": "src/popup/index.html",
+    "default_icon": {
+      "16": "public/img/logo.png",
+      "48": "public/img/logo.png"
+    }
+  },
+  "background": {
+    "service_worker": "src/background/bg.js"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://chat.openai.com/*",
+        "https://www.bing.com/*",
+        "https://claude.ai/*",
+        "https://bard.google.com/*",
+        "https://yiyan.baidu.com/*",
+        "https://www.baidu.com/*"
+      ],
+      "js": [
+        "dist/index.js"
+      ],
+      "css": [
+        "src/css/main.css",
+        "src/css/iconfont.css"
+      ]
+    },
+    {
+      "matches": [
+        "https://www.bing.com/*"
+      ],
+      "css": [
+        "src/css/bing.css"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "matches": [
+        "https://chat.openai.com/*",
+        "https://www.bing.com/*",
+        "https://claude.ai/*",
+        "https://bard.google.com/*",
+        "https://yiyan.baidu.com/*",
+        "https://www.baidu.com/*"
+      ],
+      "resources": [
+        "src/css/iconfont.woff",
+        "src/css/iconfont.woff2",
+        "src/css/iconfont.ttf",
+        "src/inject_script/index.js",
+        "public/recommend.json"
+      ]
+    }
+  ]
+}
