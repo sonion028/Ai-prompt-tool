@@ -25,7 +25,6 @@
   /* 每一项 公共 */
   box-sizing: border-box;
   line-height: 16px;
-  padding: 7px 15px;
   border: 0;
   border-radius: 20px;
   text-align: center;
@@ -34,7 +33,6 @@
   background: linear-gradient(45deg, #c705f7, #FC5C7D 70%, #6A82FB) 0 / 200% auto;
   /* 和放大动画重复 就写那边 */
   user-select: none;
-  cursor: pointer;
   position: relative;
 }
 
@@ -99,12 +97,6 @@
   transform-origin: center bottom;
 }
 
-#prompt-container:hover>.prompt-box {
-  /* hover显示列表 先废弃，js模拟 调试用 */
-  width: 100%;
-  transform: scaleY(1);
-}
-
 #prompt-container>.prompt-box::-webkit-scrollbar,
 #prompt-container>.prompt-box::-webkit-scrollbar-thumb {
   /* 不显示滑动条 */
@@ -142,7 +134,7 @@
 
 #prompt-container>.prompt-box>ul>li.item>p {
   /* bard 默认样式清楚 */
-  margin: 0;
+  margin: 7px 0 7px 15px;
 }
 
 #prompt-container>.prompt-box>ul>.item>.del,
@@ -150,7 +142,7 @@
   /* 删除按钮 */
   display: block;
   position: absolute;
-  top: 0;
+  top: -6px;
   right: 0;
   width: 15px;
   height: 15px;
@@ -158,7 +150,7 @@
   border-radius: 50%;
   text-align: center;
   font-style: normal;
-  cursor: default;
+  cursor: pointer;
   transform: rotateZ(45deg);
 }
 
@@ -202,4 +194,20 @@
   display: flex;
   align-items: center;
   /* 子元素垂直居中 */
+  padding-right: 15px; /* 扩大可点击面积 */
+  cursor: move;
+}
+
+.icon-block:active {
+  /* 拖动排序时指针 */
+  cursor: ns-resize;;
+}
+
+
+
+
+#prompt-container:hover>.prompt-box {
+  /* hover显示列表 先废弃，js模拟 调试用 */
+  width: 100%;
+  transform: scaleY(1);
 }

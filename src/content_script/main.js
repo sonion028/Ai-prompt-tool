@@ -287,7 +287,7 @@ class AiPrompt extends DomUilts {
   startHandler = (e)=>{
     e.stopPropagation();
     
-    if (e.target.classList.contains('icon-sort')) return;
+    if (!e.target.classList.contains('icon-sort')) return;
     this.isSort = true;
     this.clientY = e.clientY;
     this.sortElement = e.target.tagName !== 'LI' ? e.target.parentElement : e.target;
