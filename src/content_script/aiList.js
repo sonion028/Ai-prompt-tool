@@ -103,7 +103,7 @@ class BingAiPrompt extends AiPrompt {
   shadowRootInjectStyle(){
     this.getTextInputBox().appendChild(h('style', { 
       type: 'text/css', // 清除所有内容的样式
-      innerText: `.clear-all-content { position: absolute; top: -8px; right: 0; z-index: 9;
+      innerHTML: `.clear-all-content { position: absolute; top: -8px; right: 0; z-index: 9;
         width: 15px; height: 15px; line-height: 15px; border-radius: 50%; transform: rotateZ(45deg); 
         text-align: center;font-size: 15px;font-style: normal; background-color: #0000001a; cursor: pointer;
         font-family: "Microsoft YaHei", "Avenir", "Helvetica", "Arial", "Heiti SC", "sans-serif"; }`

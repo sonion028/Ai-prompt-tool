@@ -4,10 +4,10 @@ const conditions = [new chrome.declarativeContent.PageStateMatcher({
         pageUrl: { hostEquals: 'chat.openai.com' }
       }),
 new chrome.declarativeContent.PageStateMatcher({
-        pageUrl: { hostEquals: 'www.bing.com' }
+        pageUrl: { hostEquals: 'claude.ai' }
       }),
 new chrome.declarativeContent.PageStateMatcher({
-        pageUrl: { hostEquals: 'claude.ai' }
+        pageUrl: { hostEquals: 'www.bing.com' }
       }),
 new chrome.declarativeContent.PageStateMatcher({
         pageUrl: { hostEquals: 'bard.google.com' }

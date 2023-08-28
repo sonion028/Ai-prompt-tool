@@ -1,7 +1,7 @@
 const URLS = [
   "https://chat.openai.com/*",
-  "https://www.bing.com/*",
   "https://claude.ai/*",
+  "https://www.bing.com/*",
   "https://bard.google.com/*",
   "https://yiyan.baidu.com/*",
   "https://www.baidu.com/*"

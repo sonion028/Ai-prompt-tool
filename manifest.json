@@ -13,8 +13,8 @@
   ],
   "host_permissions": [
     "https://chat.openai.com/*",
-    "https://www.bing.com/*",
     "https://claude.ai/*",
+    "https://www.bing.com/*",
     "https://bard.google.com/*",
     "https://yiyan.baidu.com/*",
     "https://www.baidu.com/*"
@@ -38,8 +38,8 @@
     {
       "matches": [
         "https://chat.openai.com/*",
-        "https://www.bing.com/*",
         "https://claude.ai/*",
+        "https://www.bing.com/*",
         "https://bard.google.com/*",
         "https://yiyan.baidu.com/*",
         "https://www.baidu.com/*"
@@ -49,7 +49,7 @@
       ],
       "css": [
         "src/css/main.css",
-        "src/css/iconfont.css"
+        "public/font/iconfont.css"
       ]
     },
     {
@@ -65,16 +65,16 @@
     {
       "matches": [
         "https://chat.openai.com/*",
-        "https://www.bing.com/*",
         "https://claude.ai/*",
+        "https://www.bing.com/*",
         "https://bard.google.com/*",
         "https://yiyan.baidu.com/*",
         "https://www.baidu.com/*"
       ],
       "resources": [
-        "src/css/iconfont.woff",
-        "src/css/iconfont.woff2",
-        "src/css/iconfont.ttf",
+        "public/font/iconfont.woff",
+        "public/font/iconfont.woff2",
+        "public/font/iconfont.ttf",
         "src/inject_script/index.js",
         "public/recommend.json"
       ]

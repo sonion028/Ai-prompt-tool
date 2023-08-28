@@ -26,6 +26,16 @@ class Uilts {
     return this.setStorage({ prompts });
   }
 
+  // 字体图标src不能动态，就用这种方式
+  injectIconsfont(){
+    h('style', {type: 'text/css', innerHTML: `@font-face {
+      font-family: "iconfont";
+      src: url('${ chrome.runtime.getURL('public/font/iconfont.woff2?t=1693204643355') }') format('woff2'),
+      url('${ chrome.runtime.getURL('public/font/iconfont.woff?t=1693204643355') }') format('woff'),
+      url('${ chrome.runtime.getURL('public/font/iconfont.ttf?t=1693204643355') }') format('truetype');
+    }`}, null, document.head)
+  }
+
   // 注入js
   injectScript(){
     h('script', {type: 'text/javascript', src: chrome.runtime.getURL('src/inject_script/index.js')}, null, document.head);
@@ -79,7 +89,7 @@ class DomUilts extends Uilts {
         ['i', { class:'del', textContent: '+' }]
       ]
     );
-    this.setSortBtnEvent(h('i', { class: 'iconfont icon-sort' }, null, li), li); // 设置拖动事件
+    this.setSortBtnEvent(h('i', { class: 'iconfont icon-sort icon-block' }, null, li), li); // 设置拖动事件
     return li;
   }
 
@@ -132,6 +142,7 @@ class AiPrompt extends DomUilts {
 
   // 初始化 设置默认值
   async init(){
+    this.injectIconsfont(); // 字体图标
     this.firstInstatllImportPrompts(); // 首次安装，导入常用提示词
     this.createMainDom();
     const right = localStorage.getItem('right') || localStorage.setItem('right', this.RIGHT) || this.RIGHT;
@@ -275,7 +286,8 @@ class AiPrompt extends DomUilts {
   // 移动开始事件函数
   startHandler = (e)=>{
     e.stopPropagation();
-    if (e.target.className !== 'iconfont icon-sort') return;
+    
+    if (e.target.classList.contains('icon-sort')) return;
     this.isSort = true;
     this.clientY = e.clientY;
     this.sortElement = e.target.tagName !== 'LI' ? e.target.parentElement : e.target;

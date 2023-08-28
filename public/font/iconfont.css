@@ -1,0 +1,44 @@
+
+/* Project id 4180913  src动态地址不支持只有写在js注入的style标签 */
+/* @font-face {
+  font-family: "iconfont";
+  src: url('chrome-extension://nhccopckhjkdhjfllgemjmfnhoklcfna/public/font/iconfont.woff2?t=1693204643355') format('woff2'),
+  url('chrome-extension://nhccopckhjkdhjfllgemjmfnhoklcfna/public/font/iconfont.woff?t=1693204643355') format('woff'),
+  url('chrome-extension://nhccopckhjkdhjfllgemjmfnhoklcfna/public/font/iconfont.ttf?t=1693204643355') format('truetype');
+} */
+
+
+
+.iconfont {
+  font-family: "iconfont" !important;
+  font-size: 16px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+
+.icon-success:before {
+  content: "\e8c3";
+}
+
+.icon-help:before {
+  content: "\e8c4";
+}
+
+.icon-error:before {
+  content: "\e8c5";
+}
+
+.icon-warn:before {
+  content: "\e8c6";
+}
+
+.icon-add:before {
+  content: "\e600";
+}
+
+.icon-sort:before {
+  content: "\e63b";
+}
+

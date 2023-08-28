@@ -41,7 +41,7 @@ const h = (tag, props, children, parent)=>{
     var el = document.createElement(tag);
     if (props) {
       for (const [key, value] of Object.entries(props)) {
-        if (['textContent', 'innerText', 'innetHTML'].includes(key)){
+        if (['textContent', 'innerText', 'innerHTML'].includes(key)){
           el[key] = value;
         } else if (key === 'className') {
           el.className = value;

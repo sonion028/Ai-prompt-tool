@@ -7,7 +7,8 @@ class _MyMessage{
 		this.duration = 3500; // 默认显示持续时长
 		this.timer = null; //定时器
 		this.isShow = false; // 消息显示状态
-		this.cssUrl = 'https://dev.jrcaifang.com/css/iconfont.css'; // 图标字体文件路径
+		this.cssUrl = 'https://dev.jrcaifang.com/css/message.css'; // 样式路径
+		this.fontUrl = 'https://dev.jrcaifang.com/css/iconfont.css'; // 图标字体文件路径
 		this._init(); // 执行创建
 	};
 
@@ -15,10 +16,9 @@ class _MyMessage{
 
 	_init(){
 		// 创建显示组建件
-		let link = h('link', null, null, document.head);
-		link.rel = 'stylesheet';
-		link.href = this.cssUrl;
-		// 注入css   //需要不单独引入css和字体文件时开启上边这4句
+		h('link', {rel: 'stylesheet', href: this.cssUrl}, null, document.head);
+		// h('link', {rel: 'stylesheet', href: this.fontUrl}, null, document.head);
+		// 引入样式、字体图标 
 		this._messageBox = h('dialog', {class: 'my-message-modal-dialog'});
 		this._messageInner = h('div', {class: 'inner'}, null, this._messageBox); // 文字图标容器
 		this._messageIcon = h('i', {class: 'icon'}, null, this._messageInner); // 图标
