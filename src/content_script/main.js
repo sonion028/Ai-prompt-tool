@@ -76,9 +76,9 @@ class DomUilts extends Uilts {
     this.promptsElementInner.addEventListener('mousewheel', cancelDefaultEvent, true); // 滑动事件取消默认事件。防止bing关闭页面
     // 模拟hover显示
     const parentElement = this.promptsElementInner.parentElement;
-    this.container.addEventListener('mouseenter', e=>parentElement.style.cssText = 'width: 100%;transform: scaleY(1);');
-    this.promptsElementInner.addEventListener('mouseleave', e=>parentElement.style.cssText = '');
-    this.container.addEventListener('mouseleave', e=>parentElement.style.cssText = '');
+    this.container.addEventListener('mouseenter', e=>parentElement.style.cssText = 'width: 100vw;transform: scaleY(1);');
+    this.promptsElementInner.addEventListener('mouseleave', e=>parentElement.style.cssText = ''); // 出ul
+    this.container.addEventListener('mouseleave', e=>parentElement.style.cssText = ''); // 出所有
   };
 
   // 创建提示词Dom
@@ -103,7 +103,6 @@ class DomUilts extends Uilts {
     this.promptsElementInner.appendChild(fragment);
     this.promptsElementInner.style.cssText = `--promptFontSize: ${ this.PROMPT_FONT_SIZE }px;`;
     const parentElement = this.promptsElementInner.parentElement;
-    // parentElement.scrollTop = parentElement.scrollHeight
     requestAnimationFrame(()=>parentElement.scrollTop = parentElement.scrollHeight); // 使滑动处于最后，应为是倒着的
   }
 
@@ -187,7 +186,7 @@ class AiPrompt extends DomUilts {
       this.syncGetPrompts().then(res=>{
         this.prompts = res;
         this.promptRender();
-        this.myMgs.success('更新完成');
+        this.myMgs.success('更新完成', 1500);
       }).catch(err=>{
         this.myMgs.warning('提示词渲染出错，需要手动刷新');
         console.warn('提示词渲染出错', err);

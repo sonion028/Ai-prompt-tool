@@ -16,7 +16,7 @@
 }
 
 #prompt-container:hover {
-  /* 整个容器hover */
+  /* 整个容器hover 时的高度 */
   height: auto;
   max-height: calc(100vh - var(--bottom));
 }
@@ -88,13 +88,16 @@
 
 #prompt-container>.prompt-box {
   /* 折叠 */
+  height: 88vh;
   width: 0; /* 折叠时为0 */
-  margin-right: -20px; /* 贴右边 子元素拉回来 使阴影更自然 */
-  overflow-y: scroll; /* 可滚动 */
+  overflow: scroll; /* 可滚动 */
   scroll-behavior: smooth; /* 平滑滚动 */ 
+  -webkit-overflow-scrolling: touch; /* 开启硬件加速 避免滚动卡顿 */
   transform: scaleY(0);
   transition: transform 0.2s;
   transform-origin: center bottom;
+  /* 子元素靠右 */
+  display: flex;
 }
 
 #prompt-container>.prompt-box::-webkit-scrollbar,
@@ -107,17 +110,18 @@
 
 #prompt-container>.prompt-box>ul {
   /* 提示词 列表 */
+  flex-shrink: 0;/* 不缩放 */
+  max-width: 74%;
+  height: fit-content;
   display: flex;
   flex-direction: column-reverse;
   align-items: flex-end;
   overflow: visible;
-  margin: 0; /* bard 默认样式清楚 */
+  margin: auto;
+  margin-bottom: 0; 
+  margin-right: 0;/* bard 默认样式清楚 */
   padding: 0; /* bard 默认样式清楚 */
   /* font-size: var(--promptFontSize); */
-  z-index: -1;
-  position: relative;
-  width: 74%;
-  right: calc(-26% + 20px); /* 父元素贴右边 子元素拉回来 使阴影更自然 */
 }
 
 #prompt-container>.prompt-box>ul>li.item {
@@ -149,6 +153,7 @@
   line-height: 15px;
   border-radius: 50%;
   text-align: center;
+  font-family: "Microsoft YaHei", "Avenir", "Helvetica", "Arial", "Heiti SC", "sans-serif";
   font-style: normal;
   cursor: pointer;
   transform: rotateZ(45deg);
@@ -194,7 +199,7 @@
   display: flex;
   align-items: center;
   /* 子元素垂直居中 */
-  padding-right: 15px; /* 扩大可点击面积 */
+  padding: 0 15px 0 5px; /* 扩大可点击面积 */
   cursor: move;
 }
 
@@ -208,6 +213,6 @@
 
 #prompt-container:hover>.prompt-box {
   /* hover显示列表 先废弃，js模拟 调试用 */
-  width: 100%;
-  transform: scaleY(1);
+  /* width: 100vw;
+  transform: scaleY(1); */
 }
