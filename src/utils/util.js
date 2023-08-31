@@ -1,6 +1,16 @@
+
 /**
  * @Author: sonion
- * @msg: 解决了循环引用、原型一致的深度克隆
+ * @msg: 获取元素的数据类型
+ * @param {any} data
+ * @return {String}
+ */
+const getType = (data)=> Object.prototype.toString.call(data).replace(/^\[[a-z]+ ([A-Za-z]+)\]$/, '$1');
+
+
+/**
+ * @Author: sonion
+ * @msg: 解决了循环引用、原型一致的深度克隆 // 原生structuredClone 没解决Symbol、原型链，兼容到22年8月
  * @param {Object|Array} value 要克隆的对象
  * @return {Object|Array}
  */
@@ -8,13 +18,13 @@ const deepClone = (value)=>{
   const cache = new WeakMap(); // 解决循环引用 weakMap不影响垃圾回收
   const _deepClone = (value)=>{
     if (value === null || typeof value !== 'object') return value;
+    if (getType(value) === 'Date') return new Date(value.valueOf());
+    if (getType(value) === 'RegExp') return new RegExp(value.valueOf());
     const result = Array.isArray(value) ? [] : {};
     if (cache.get(value)) return cache.get(value); // 解决循环引用
     Object.setPrototypeOf(result, Object.getPrototypeOf(value));
     cache.set(value, result); // 解决循环引用 把克隆过的保存，因为是引用对象克隆前保存就可以
-    for (const [key, val] of Object.entries(value)){
-      result[key] = _deepClone(val);
-    }
+    Reflect.ownKeys(value).map(key=>result[key] = _deepClone(value[key]))
     return result;
   }
   return _deepClone(value);
@@ -80,6 +90,7 @@ const h = (tag, props, children, parent)=>{
 }
 
 export {
+  getType,
   deepClone,
   h
 }
